@@ -53,12 +53,8 @@ jobs:
           package: .
 
       - name: Run Laravel migrations and cache
-        uses: Azure/run-azure-webapp-remote-command@v1
+        uses: azure/cli@v2
         with:
-          app-name: 'lloyds-laravel'
-          resource-group: 'WE-Lloyds-Playground'  # Replace with your Azure resource group
-          command-line: |
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+          inlineScript: |
+            az webapp ssh --name lloyds-laravel --resource-group WE-Lloyds-Playground --command "php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+
