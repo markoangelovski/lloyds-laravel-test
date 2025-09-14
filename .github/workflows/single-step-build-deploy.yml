@@ -51,7 +51,13 @@ jobs:
           app-name: 'lloyds-laravel'
           slot-name: 'Production'
           package: .
-          post-deploy-commands: |
+
+      - name: Run Laravel migrations and cache
+        uses: Azure/run-azure-webapp-remote-command@v1
+        with:
+          app-name: 'lloyds-laravel'
+          resource-group: 'WE-Lloyds-Playground'  # Replace with your Azure resource group
+          command-line: |
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
