@@ -51,7 +51,3 @@ jobs:
           app-name: 'lloyds-laravel'
           slot-name: 'Production'
           package: .
-
-      - name: Run Laravel migrations on Azure Web App
-        run: |
-          az webapp ssh --name lloyds-laravel --resource-group WE-Lloyds-Playground --command "php artisan migrate --force"
